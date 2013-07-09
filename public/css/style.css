@@ -1,0 +1,165 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #ececec;
+}
+.bg-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxOCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI2NCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSI5OSUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvcmFkaWFsR3JhZGllbnQ+CiAgPHJlY3QgeD0iLTUwIiB5PSItNTAiIHdpZHRoPSIxMDEiIGhlaWdodD0iMTAxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+  background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 18%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 99%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #ffffff), color-stop(18%, #ffffff), color-stop(64%, rgba(255, 255, 255, 0)), color-stop(99%, rgba(255, 255, 255, 0)));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 18%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 99%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 18%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 99%);
+  /* Opera 12+ */
+
+  background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 18%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 99%);
+  /* IE10+ */
+
+  background: radial-gradient(ellipse at center, #ffffff 0%, #ffffff 18%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, 0) 99%);
+  /* W3C */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=1);
+  /* IE6-8 fallback on horizontal gradient */
+
+}
+a {
+  color: #00B7FF;
+}
+.player {
+  float: left;
+}
+.player .jp-gui {
+  position: relative;
+  padding: 20px;
+  padding-right: 0;
+  width: 462px;
+}
+.player .jp-gui ul {
+  margin: 0;
+  padding: 0;
+}
+.player .jp-gui ul li {
+  position: relative;
+  float: left;
+  list-style: none;
+  margin: 2px;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.player .jp-gui ul li a {
+  margin: 0 4px;
+}
+.player .jp-gui ul li.jp-repeat,
+.player .jp-gui ul li.jp-repeat-off {
+  margin-left: 227px;
+}
+.player .jp-gui ul li.jp-mute,
+.player .jp-gui ul li.jp-unmute {
+  margin-left: 10px;
+}
+.player .jp-gui ul li.jp-volume-max {
+  margin-left: 70px;
+}
+.player .jp-gui ul li.jp-pause,
+.player .jp-gui ul li.jp-repeat-off,
+.player .jp-gui ul li.jp-unmute {
+  display: none;
+}
+.player .jp-gui .jp-progress-slider {
+  position: absolute;
+  top: 28px;
+  left: 100px;
+  width: 200px;
+}
+.player .jp-gui .jp-progress-slider .ui-slider-handle {
+  cursor: pointer;
+}
+.player .jp-gui .jp-volume-slider {
+  position: absolute;
+  top: 31px;
+  left: 382px;
+  width: 50px;
+  height: .4em;
+}
+.player .jp-gui .jp-volume-slider .ui-slider-handle {
+  height: .8em;
+  width: .8em;
+  cursor: pointer;
+}
+.player .jp-gui .jp-current-time,
+.player .jp-gui .jp-duration {
+  position: absolute;
+  top: 45px;
+  font-size: 0.7em;
+  cursor: default;
+}
+.player .jp-gui .jp-current-time {
+  left: 92px;
+}
+.player .jp-gui .jp-duration {
+  right: 179px;
+}
+.player .jp-gui .jp-clearboth {
+  clear: both;
+}
+.player .playlist {
+  background: #FFF;
+  padding: 10px;
+  border: 1px solid #d6d6d6;
+  margin: 10px 0 0;
+}
+.player .playlist .song {
+  margin: 5px 0;
+}
+.chat {
+  float: left;
+  margin: 0 0 0 10px;
+  background: #e0e0e0;
+  padding: 10px;
+  width: 420px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.chat .chat-content {
+  background: #fff;
+  height: 400px;
+  width: 95%;
+  padding: 10px;
+  margin: 0 0 10px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  overflow: auto;
+}
+.chat .chat-content .message {
+  padding: 2px;
+  color: #555;
+}
+.chat .chat-content .message.server {
+  color: #9c9;
+  font-weight: bold;
+  text-indent: 10px;
+}
+.chat .chat-content .message.self {
+  color: #006dcc;
+}
+.chat .field {
+  width: 80%;
+  margin: 0;
+}
+.chat .btn {
+  padding: 4px 14px;
+  margin-left: 5px;
+}

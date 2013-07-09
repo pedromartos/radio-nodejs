@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    .container
+        .bg-effect.gradient
+        h1= title
+        p Welcome to #{title}
+
+        .player
+            #jquery_jplayer_1.jp-jplayer
+            #jp_container_1
+                .jp-gui.ui-widget.ui-widget-content.ui-corner-all
+                    ul
+                        li.jp-play.ui-state-default.ui-corner-all
+                            a(href="javascript:;", class="jp-play ui-icon ui-icon-play", tabindex="1", title="play") play
+                        li.jp-pause.ui-state-default.ui-corner-all
+                            a(href="javascript:;", class="jp-pause ui-icon ui-icon-pause", tabindex="1", title="pause") pause
+                        li.jp-stop.ui-state-default.ui-corner-all
+                            a(href="javascript:;", class="jp-stop ui-icon ui-icon-stop", tabindex="1", title="stop") stop
+                        li.jp-repeat.ui-state-default.ui-corner-all
+                            a(href="javascript:;", class="jp-repeat ui-icon ui-icon-refresh", tabindex="1", title="repeat") repeat
+                        li.jp-repeat-off.ui-state-default.ui-state-active.ui-corner-all
+                            a(href="javascript:;", class="jp-repeat-off ui-icon ui-icon-refresh", tabindex="1", title="repeat off") repeat off
+                        li.jp-mute.ui-state-default.ui-corner-all
+                            a(href="javascript:;", class="jp-mute ui-icon ui-icon-volume-off", tabindex="1", title="mute") mute
+                        li.jp-unmute.ui-state-default.ui-state-active.ui-corner-all
+                            a(href="javascript:;", class="jp-unmute ui-icon ui-icon-volume-off", tabindex="1", title="unmute") unmute
+                        li.jp-volume-max.ui-state-default.ui-corner-all
+                            a(href="javascript:;", class="jp-volume-max ui-icon ui-icon-volume-on", tabindex="1", title="max volume") max volume
+                    .jp-progress-slider
+                    .jp-volume-slider
+                    .jp-current-time
+                    .jp-duration
+                    .jp-clearboth
+
+
+            .playlist
+                each song, i in songs
+                    .song
+                        a(href="javascript:;", song="/songs/cicero/#{song}") #{song}
+
+        .chat.clearfix.form
+            .chat-content
+            input.field(type="text")
+            input.btn.btn-primary(type="button", value="Send")
