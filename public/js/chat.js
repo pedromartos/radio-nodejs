@@ -1,11 +1,14 @@
 $(document).ready(function(){
 
-    var socket = io.connect('http://177.3.115.216:3000/');
+    var socket = io.connect('http://187.55.96.212:3000/');
 
     var $chat = $('.chat-content');
     var $field = $('.chat .field');
     var $button = $('.chat .btn');
 
+    /**
+     * REAL-TIME EVENTS
+     */
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
         // call the server-side function 'adduser' and send one parameter (value of prompt)
@@ -33,6 +36,9 @@ $(document).ready(function(){
     });
 
 
+    /**
+     * EVENT HANDLERS
+     */
     // when the client clicks SEND
     $button.click( function() {
         var message = $field.val();

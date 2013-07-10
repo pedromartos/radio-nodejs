@@ -1,12 +1,14 @@
 $(document).ready(function () {
 
+    var socket = io.connect('http://187.55.96.212:3000/');
+
     // JPLAYER
     /*
      * jQuery UI ThemeRoller
      */
-
     var myPlayer = $("#jquery_jplayer_1"),
         myPlayerData,
+        loadTime,
         fixFlash_mp4, // Flag: The m4a and m4v Flash player gives some old currentTime values when changed.
         fixFlash_mp4_id, // Timeout ID used with fixFlash_mp4
         ignore_timeupdate, // Flag used with fixFlash_mp4
@@ -33,9 +35,18 @@ $(document).ready(function () {
                     myControl.volume.slider("value", event.jPlayer.options.volume);
                 }
             },
+            loadstart: function(event){
+                loadTime = new Date();
+            },
+            pause: function(event){
+                socket.emit('songPause');
+            },
+            play: function(event){
+
+            },
             swfPath: "/js/jplayer",
             supplied: "mp3",
-            solution: "flash",
+            solution: "flash, html",
             cssSelectorAncestor: "#jp_container_1",
             wmode: "window",
             keyEnabled: true
@@ -76,7 +87,9 @@ $(document).ready(function () {
                     },1000);
                 }
                 // Move the play-head to the value and factor in the seek percent.
-                myPlayer.jPlayer("playHead", ui.value * (100 / sp));
+                var value = ui.value * (100 / sp);
+                myPlayer.jPlayer("playHead", value);
+                socket.emit('songSeek', value);
             } else {
                 // Create a timeout to reset this slider to zero.
                 setTimeout(function() {
@@ -99,13 +112,53 @@ $(document).ready(function () {
         }
     });
 
-
     // Playlist
     $('.playlist a').click(function(){
+        var data = {'song' : $(this).attr('song')}
+        socket.emit('setsong', data);
+    });
 
+    $('.jp-stop').click(function(){
+        socket.emit('songStop');
+    });
+
+    $('.jp-play').click(function(){
+        var sp = myPlayerData.status.seekPercent;
+        var value = myControl.progress.slider('value') * (100 / sp);
+
+        socket.emit('songPlay', value);
+    });
+
+
+    /**
+     *
+     * REAL-TIME EVENTS
+     *
+     */
+
+
+    // Send play evento to server
+    socket.on('play', function(data){
         myPlayer.jPlayer("setMedia", {
-            mp3: $(this).attr('song')
+            mp3: data.song
         }).jPlayer('play');
+    });
+
+    socket.on('updateSongProgress', function(data){
+        myPlayer.jPlayer("playHead", data);
+    });
+
+    socket.on('stop', function(){
+        myPlayer.jPlayer("stop");
+    });
+
+    socket.on('pause', function(){
+        myPlayer.jPlayer('pause');
+    });
+
+    socket.on('playFrom', function(data){
+        console.log(data);
+        myPlayer.jPlayer("playHead", data).jPlayer('play');
     });
 
 });

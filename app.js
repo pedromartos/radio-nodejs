@@ -64,4 +64,24 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('updatechat', {username: 'SERVER', message: socket.username + ' has disconnected'});
     });
 
+    socket.on('setsong', function(data){
+        io.sockets.emit('play', data);
+    });
+
+    socket.on('songSeek', function(data){
+        io.sockets.emit('updateSongProgress', data);
+    });
+
+    socket.on('songStop', function(){
+        io.sockets.emit('stop');
+    });
+
+    socket.on('songPause', function(){
+        io.sockets.emit('pause');
+    });
+
+    socket.on('songPlay', function(data){
+        io.sockets.emit('playFrom', data);
+    });
+
 });
