@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var socket = io.connect('http://187.55.96.212:3000/');
+    var socket = io.connect('http://192.168.1.2:3000/');
 
     // JPLAYER
     /*

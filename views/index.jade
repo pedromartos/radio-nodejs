@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    input#username(type="hidden", value="#{user}")
     .container
         .bg-effect.gradient
         h1= title
@@ -37,7 +38,7 @@ block content
             .playlist
                 each song, i in songs
                     .song
-                        a(href="javascript:;", song="/songs/cicero/#{song}") #{song}
+                        a(href="javascript:;", song="/songs/#{song}") #{song}
 
         .chat.clearfix.form
             .chat-content

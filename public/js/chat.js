@@ -1,10 +1,11 @@
 $(document).ready(function(){
 
-    var socket = io.connect('http://187.55.96.212:3000/');
+    var socket = io.connect('http://192.168.1.2:3000/');
 
     var $chat = $('.chat-content');
     var $field = $('.chat .field');
     var $button = $('.chat .btn');
+    var $username = $('#username');
 
     /**
      * REAL-TIME EVENTS
@@ -12,8 +13,25 @@ $(document).ready(function(){
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
         // call the server-side function 'adduser' and send one parameter (value of prompt)
-//        socket.emit('adduser', prompt("What's your name?"));
-        socket.emit('adduser', 'User');
+        if($username.val() == ''){
+            var user = prompt("What's your name?");
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify({user: user}),
+                contentType: 'application/json',
+                url: 'http://localhost:3000/addUser',
+                success: function(data) {
+                    $username.val(user);
+                }
+            });
+        }
+        else {
+            var user = $username.val();
+        }
+
+
+        socket.emit('adduser', user);
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -22,6 +40,9 @@ $(document).ready(function(){
         var css = '';
         if(data.username == 'SERVER'){
             css = ' server';
+        }
+        else if(data.username == $username.val()){
+            css = ' self';
         }
 
         $chat.append('<div class="message' + css + '"><strong>' + data.username + ':</strong> ' + data.message + '</div>');

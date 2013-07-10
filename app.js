@@ -9,6 +9,7 @@ var express = require('express')
     , path = require('path');
 
 var app = express();
+var RedisStore = require('connect-redis')(express);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -19,8 +20,8 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.cookieParser('LadoDireito'));
-app.use(express.session());
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
 app.use(app.router);
 app.use(require('less-middleware')({ src:__dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,14 +31,25 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+/**
+ * ROUTES
+ */
 app.get('/', routes.index);
+app.post('/addUser', routes.addUser);
 app.get('/users', user.list);
 
+
+/**
+ * Starting HTTP Server
+ */
 var server = http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-// Socket.IO
+
+/**
+ * Socket.IO Events
+ */
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {

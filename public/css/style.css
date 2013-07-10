@@ -120,9 +120,12 @@ a {
   padding: 10px;
   border: 1px solid #d6d6d6;
   margin: 10px 0 0;
+  width: 462px;
+  overflow: auto;
 }
 .player .playlist .song {
   margin: 5px 0;
+  white-space: nowrap;
 }
 .chat {
   float: left;
